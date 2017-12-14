@@ -1,0 +1,68 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.xu</groupId>
+		<artifactId>SFCloudDisk</artifactId>
+		<version>0.0.1</version>
+	</parent>
+	<artifactId>web</artifactId>
+	<packaging>war</packaging>
+	<name>web</name>
+	<description>项目入口</description>
+	<properties>
+		<webVersion>3.1</webVersion>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+		<!-- servlet的依赖 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.2</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-servlet-api</artifactId>
+			<version>8.5.13</version>
+		</dependency>
+		 <dependency>
+			<groupId>com.auth0</groupId>
+		    <artifactId>java-jwt</artifactId>
+		    <version>3.1.0</version>
+		</dependency>
+		 <dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>4.1.6</version>
+		</dependency>
+
+		 <dependency>
+		 	<groupId>com.xu</groupId>
+		 	<artifactId>common-core</artifactId>
+		 	<version>0.0.1</version>
+		 </dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			 
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>   
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+		  
+		</plugins>
+	</build>
+	<groupId>com.xu</groupId>
+</project>

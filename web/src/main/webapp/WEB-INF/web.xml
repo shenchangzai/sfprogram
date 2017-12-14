@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" 
+id="WebApp_ID" version="3.1">
+    <display-name>common-framework</display-name>
+
+    <!-- distributable 应用支持在分布式Web容器中部署 -->
+    <distributable/>
+
+    <!-- 配置Spring Context 加载配置文件 ContextLoaderListener的作用就是启动Web容器时，自动装配ApplicationContext的配置信息,整个spring加载配置过程由ContextLoader来完成. -->
+    <listener>
+       <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <context-param>
+       <param-name>contextConfigLocation</param-name>
+       <param-value>
+            classpath*:/spring/spring-context.xml
+            ,classpath*:/spring/spring-datasource.xml
+            ,classpath*:/spring/spring-task.xml 
+        </param-value>
+    </context-param>
+    <!-- 让jetty支持跨域访问 start -->  
+    <filter>  
+        <filter-name>cross-origin</filter-name>  
+        <filter-class>org.eclipse.jetty.servlets.CrossOriginFilter</filter-class>  
+        <init-param>  
+            <param-name>allowedOrigins</param-name>  
+            <param-value>*</param-value>  
+        </init-param>  
+        <init-param>  
+            <param-name>allowedMethods</param-name>  
+            <param-value>GET,POST,HEAD,PUT,OPTIONS,DELETE</param-value>  
+        </init-param>
+        <init-param>  
+            <param-name>allowedHeaders</param-name>  
+            <param-value>X-Requested-With,Content-Type,Accept,Origin</param-value>  
+        </init-param>  
+    </filter>  
+    <!-- 此处表示jetty中的所有url都可以支持跨域 -->  
+    <filter-mapping>  
+        <filter-name>cross-origin</filter-name>  
+        <url-pattern>/*</url-pattern>  
+    </filter-mapping>
+	<!-- 让jetty支持跨域访问 end -->  
+	
+
+    <!-- 解决AJAX PUT请求获取不到参数问题 -->
+    <filter>
+       <filter-name>HttpMethodFilter</filter-name>
+       <filter-class>org.springframework.web.filter.HttpPutFormContentFilter</filter-class>
+    </filter>
+    <filter-mapping>
+       <filter-name>HttpMethodFilter</filter-name>
+       <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- 字符编码Filter, 统一为UTF-8 -->
+    <filter>
+       <filter-name>encoding</filter-name>
+       <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+       <init-param>
+           <param-name>encoding</param-name>
+           <param-value>UTF-8</param-value>
+       </init-param>
+    </filter>
+    <filter-mapping>
+       <filter-name>encoding</filter-name>
+       <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- 记录访问日志 -->
+    <filter>
+       <filter-name>access-log</filter-name>
+       <filter-class>com.xu.common.filter.AccessLogFilter</filter-class>
+       <async-supported>true</async-supported>
+       <init-param>
+           <param-name>excludes</param-name>
+           <param-value>/static/**,/dist/**,*.js,*.css,*.jpg,*.gif,*.png,*.ico,*.vue</param-value>
+       </init-param>
+       <init-param>
+           <param-name>includes</param-name>
+           <param-value>/**</param-value>
+       </init-param>
+    </filter>
+    <filter-mapping>
+       <filter-name>access-log</filter-name>
+       <url-pattern>/*</url-pattern>
+       <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+    
+   
+    
+    <!-- Spring MVC配置 -->
+    <servlet>
+       <servlet-name>dispatcherServlet</servlet-name>
+       <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+       <init-param>
+           <param-name>contextConfigLocation</param-name>
+           <param-value>classpath*:/spring/spring-mvc.xml</param-value>
+       </init-param>
+       <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+       <servlet-name>dispatcherServlet</servlet-name>
+       <!-- <url-pattern>/</url-pattern> 会匹配到/login这样的路径型url，不会匹配到模式为*.jsp这样的后缀型url -->
+       <!-- <url-pattern>/*</url-pattern> 会匹配所有url：路径型的和后缀型的url(包括/login,*.jsp,*.js和*.html等) -->
+       <url-pattern>/</url-pattern>
+    </servlet-mapping>
+	<listener>
+		 <listener-class>
+		  org.springframework.web.context.request.RequestContextListener
+		 </listener-class>
+	</listener>
+    <welcome-file-list>
+       <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    
+    <!-- 配置Session 有效期时间 30分钟 -->
+    <session-config>
+       <session-timeout>30</session-timeout>
+    </session-config>
+</web-app>

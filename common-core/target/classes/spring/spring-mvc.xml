@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+
+	<!-- 自动扫描controller包下的所有类，使其认为spring mvc的控制器 -->
+	<!-- base-package 如果多个，用“,”分隔 -->
+	<context:component-scan base-package="com.xu.*" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.RestController" />
+		<context:include-filter type="annotation" expression="org.springframework.context.annotation.Configuration" />
+	</context:component-scan>
+
+	<!-- 静态资源直接映射具体的路径 -->
+	<mvc:resources mapping="/index.jsp*" location="/index.jsp" />
+	<mvc:resources mapping="/static/**" location="/WEB-INF/static/"/>
+	<mvc:resources mapping="/swagger/**" location="/WEB-INF/swagger-ui/" />
+	<mvc:resources mapping="/preview/**" location="/static/web/"/>
+
+	<!-- 取代mvc:annotation-driven>,用了<mvc:annotation-driven />,它会自动注册DefaultAnnotationHandlerMapping 与AnnotationMethodHandlerAdapter, 不能自己注入interceptors,responseBodyAdvice,messageConverters等等. -->
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<!-- 自定义返回值拦截 -->
+		<property name="responseBodyAdvice">
+			<list> 
+				<!-- 在处理响应请求前的数据处理类,默认提供记录日志.其他需求如JSONP等等可以自行扩展 
+				<bean class="com.xu.common.advice.BaseResponseBodyAdvice" />-->
+				<!-- 支持JsonView -->
+				<bean class="org.springframework.web.servlet.mvc.method.annotation.JsonViewResponseBodyAdvice" />
+			</list>
+		</property>
+		<property name="messageConverters">
+			<list>
+				<!-- 实现json的自动转换化 -->
+				<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+			</list>
+		</property>
+		<!-- Spring MVC 数据验证配置 -->
+		<property name="webBindingInitializer" ref="configurableWebBindingInitializer" />
+	</bean>
+
+	<!-- Spring MVC 数据验证配置,使用方法: model模型配置: public class User implements BaseModel<String> { private String id = null; @NotNull(message = "用户名不能为空") @Length(min=5, max=20, message="用户名长度必须在5-20之间") private String name = null; ... } controller配置,在传入的参数里加上@Valid: @RequestMapping(method = RequestMethod.POST) @ResponseStatus(HttpStatus.CREATED) public Integer add(@Valid User bean, Errors errors) throws Exception { if (errors.hasErrors()) { throw new ParameterErrorException(errors.getFieldErrors()); } return this.service.add(bean); } -->
+	<bean id="configurableWebBindingInitializer" class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
+		<property name="validator" ref="localValidatorFactoryBean" />
+	</bean>
+	<!-- 本地验证工程类,使用Hibernate-Validator实现 -->
+	<bean id="localValidatorFactoryBean" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
+		<!-- 不使用默认classpath下的ValidationMessages.properties ,配置自定义的消息信息文件 -->
+		<property name="validationMessageSource" ref="messageSource" />
+	</bean>
+	<!-- 定义错误信息 -->
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:/i18n/messages" />
+		<property name="fileEncodings" value="utf-8" />
+		<property name="cacheSeconds" value="120" />
+	</bean>
+
+	<!-- 视图解析模版 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/" p:suffix=".jsp" p:viewClass="org.springframework.web.servlet.view.JstlView" />
+
+	<!-- 启动全局异常处理 -->
+	<bean class="com.xu.common.resolver.GlobalExceptionResolver" />
+
+	<!-- 支持上传文件 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
+</beans>
