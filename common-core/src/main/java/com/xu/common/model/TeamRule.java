@@ -12,7 +12,6 @@ public class TeamRule  implements BaseModel<String>{
 	private String rule;
 	private int incr = 1;
 
-	
 	public String getMktId() {
 		return mktId;
 	}
