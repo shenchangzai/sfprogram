@@ -40,7 +40,7 @@ public class GenerateQrCodeController extends BaseCRUDController<String, Demo, D
 		// 生成唯一ID
 		int uuid = (int) (Math.random()* 100000);
 		ApplicationConfig config=new ApplicationConfig();
-		String contextPath=config.getProperty("server.domain")+"/teamInfo/"+teamId;
+		String contextPath=config.getProperty("server.domain")+"/#/teamDetail?id="+teamId;
 		// 生成二维码
 		String imgName = uuid + ".png";
 		String saveFilePath =System.getProperty("user.dir")+"\\webapp\\"+imgName ;
@@ -55,8 +55,8 @@ public class GenerateQrCodeController extends BaseCRUDController<String, Demo, D
 	}
 	@RequestMapping(value = "/download/{fileid}", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
-	@ApiOperation(value = "创建文件夹")
-	public void getfile(@ApiParam(value = "当前目录", required = true) @PathVariable("fileid") String fileid) throws IOException{
+	@ApiOperation(value = "下载文件")
+	public void getfile(@ApiParam(value = "下载文件", required = true) @PathVariable("fileid") String fileid) throws IOException{
 		HttpServletResponse response = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getResponse();
 		OutputStream outp = response.getOutputStream();
 		//二维码图片地址
@@ -69,7 +69,7 @@ public class GenerateQrCodeController extends BaseCRUDController<String, Demo, D
 	        FileInputStream in = null;
 	        BufferedInputStream bis=null;
 	        BufferedOutputStream bos=null;
-	        try {
+	        try{
 	           outp = response.getOutputStream();
 	           in = new FileInputStream(fullPath);
 	           byte[] b = new byte[8192];
