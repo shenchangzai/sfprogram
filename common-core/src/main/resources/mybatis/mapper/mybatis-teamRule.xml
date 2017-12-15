@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xu.common.dao.TeamRuleDao">
 	<resultMap id="bean" type="com.xu.common.model.TeamRule">
-		<result column="MAT_ID" property="mktId" jdbcType="VARCHAR" />
+		<result column="MKT_ID" property="mktId" jdbcType="VARCHAR" />
 		<result column="RULE" property="rule" jdbcType="VARCHAR" />
 		<result column="INCR" property="incr" jdbcType="INTEGER" />
 	</resultMap>
 	<select id="getTeamRule" resultMap="bean" >
 		SELECT RULE,INCR FROM TT_TEAM_RULE 
-		WHERE MAT_ID = #{mktId}
+		WHERE MKT_ID = #{mktId}
 		 AND RULE = #{rule}
 	</select>
 	

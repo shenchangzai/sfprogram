@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.xu.common.DateFormat;
 import com.xu.common.model.Anybus;
 import com.xu.common.model.TeamRule;
 import com.xu.common.model.TtTeam;
@@ -33,30 +34,40 @@ public class MarketBaseTask {
 		}
 		for (Anybus mkt : mktList) {
 			long sysTime = System.currentTimeMillis();
-			long lastTime = mkt.getLastTime() + mkt.getGroupDuration()*60*1000;
-			
-			if(sysTime <= lastTime){
-				String teamId = UUIDUtil.getUUID();
-				TtTeam team = new TtTeam();
-				team.setTeamId(teamId);
-				team.setTeamName(getTeamName(mkt));
-//				team.setEndTime(sysTime+mkt.getGroupDuration()*60*1000);
-				team.setStatus("1");				
-				team.setMktId(mkt.getMktId());				
+			long lastTime = mkt.getLastTime() ;
+			if(lastTime == 0){//初次开团
+				createTeam(mkt);
+			}else if(sysTime <= (lastTime+mkt.getGroupDuration()*60*1000)){
+							
+			}else{
+				
 			}
-			
 		}
 		
 	}
 	
-	
+	private boolean createTeam(Anybus mkt){
+		try {
+			String teamId = UUIDUtil.getUUID();
+			TtTeam team = new TtTeam();
+			team.setTeamId(teamId);
+			team.setTeamName(getTeamName(mkt));
+			team.setEndTime(System.currentTimeMillis()+mkt.getGroupDuration()*60*1000);
+			team.setStatus("1");				
+			team.setMktId(mkt.getMktId());	
+			return true;
+		} catch (Exception e) {
+			
+		}
+		return false;
+	}
 	
 	/**
 	 * 格式化时间字符串
 	 * @return
 	 */
 	private String getDate(){
-		SimpleDateFormat sf = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat sf = new SimpleDateFormat(DateFormat.DATE_YYYYMMDD);
 		return sf.format(new Date());
 	}
 	
