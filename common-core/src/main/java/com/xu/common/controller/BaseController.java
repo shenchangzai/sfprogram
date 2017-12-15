@@ -50,7 +50,6 @@ public abstract class BaseController<PK extends Serializable, M extends BaseMode
 				try {
 					setValue(DateUtils.parseDate(text, DateFormat.DATE_TIME, DateFormat.DATE, DateFormat.TIME));
 				} catch (ParseException e) {
-					e.printStackTrace();
 				}
 			}
 		});

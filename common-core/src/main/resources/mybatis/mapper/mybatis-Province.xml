@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xu.common.dao.ProvinceDao">
+	<resultMap id="bean" type="com.xu.common.model.Province">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="PROVINCE_ID" property="provinceId" jdbcType="VARCHAR" />
+		<result column="PROVINCE_NAME" property="provinceName" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="getProvinces" resultMap="bean" >
+		select province_id,province_name from  Province
+	</select>	
+</mapper>
