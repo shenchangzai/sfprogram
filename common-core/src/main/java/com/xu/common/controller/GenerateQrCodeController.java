@@ -21,6 +21,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.xu.common.config.ApplicationConfig;
 import com.xu.common.model.Demo;
+import com.xu.common.model.ImageCode;
 import com.xu.common.model.Result;
 import com.xu.common.service.DemoService;
 import com.xu.common.utility.TwoDimensionCode;
@@ -46,9 +47,11 @@ public class GenerateQrCodeController extends BaseCRUDController<String, Demo, D
 		TwoDimensionCode handler = new TwoDimensionCode();
 		handler.encoderQRCode(contextPath, saveFilePath, "png");
 		// 生成的图片访问地址
-		String qrCodeImg = config.getProperty("server.domain")+"/qrcode/downLoadFile/"+uuid;
-		String jsonStr = "{\"uuid\":" + uuid + ",\"qrCodeImg\":\"" + qrCodeImg + "\"}";
-		return Result.succeed(jsonStr);
+		String qrCodeImg = config.getProperty("server.domain")+"/qrcode/download/"+uuid;
+		ImageCode obj=new ImageCode();
+		obj.setUuid(uuid);
+		obj.setQrCodeImg(qrCodeImg);
+		return Result.succeed(obj);
 	}
 	@RequestMapping(value = "/download/{fileid}", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
@@ -56,9 +59,10 @@ public class GenerateQrCodeController extends BaseCRUDController<String, Demo, D
 	public void getfile(@ApiParam(value = "当前目录", required = true) @PathVariable("fileid") String fileid) throws IOException{
 		HttpServletResponse response = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getResponse();
 		OutputStream outp = response.getOutputStream();
+		//二维码图片地址
 		String fullPath=System.getProperty("user.dir")+"\\webapp\\"+fileid+".png";
-	      File file = new File(fullPath);
-	      if (file.exists()) {
+	    File file = new File(fullPath);
+	    if (file.exists()) {
 	        response.setContentType("APPLICATION/OCTET-STREAM");
 	        String filedisplay = URLEncoder.encode(fileid+".png", "UTF-8");
 	        response.addHeader("Content-Disposition", "attachment;filename="+ filedisplay);
@@ -95,8 +99,6 @@ public class GenerateQrCodeController extends BaseCRUDController<String, Demo, D
 	        }
 	      } else {
 	        outp.write("<script type=\"text/javascript\">alert(\"文件不存在!\");</script>".getBytes("utf-8"));
-	        
 	      }
 	}	
-	
 }
