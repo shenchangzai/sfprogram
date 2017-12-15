@@ -23,8 +23,7 @@ public class SerializeUtil {
 			byte[] bytes = baos.toByteArray();
 			return bytes;
 		} catch (Exception e) {
-			logger.error("serialize failed, the obj is:" + object);
-			e.printStackTrace();
+			logger.error("serialize failed, the obj is:" + object,e);
 		}
 		return null;
 	}
@@ -39,8 +38,7 @@ public class SerializeUtil {
 			return ois.readObject();
 		} catch (Exception e) {
 			logger.error("unserialize failed, the string is:"
-					+ new String(bytes));
-			e.printStackTrace();
+					+ new String(bytes),e);
 		}
 		return null;
 	}

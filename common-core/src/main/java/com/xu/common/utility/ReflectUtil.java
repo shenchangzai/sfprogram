@@ -29,7 +29,7 @@ public class ReflectUtil {
                 field.setAccessible(access);
             }
         } catch (Exception e) {
-            logger.debug("can't get field " + fieldName + " value in class " + object);
+            logger.debug("can't get field " + fieldName + " value in class " + object,e);
         }
 
         return value;
@@ -51,7 +51,7 @@ public class ReflectUtil {
             try {
                 return superClass.getDeclaredField(fieldName);
             } catch (Exception e) {
-                logger.debug("can't found field " + fieldName + " in class " + object.getClass());
+                logger.debug("can't found field " + fieldName + " in class " + object.getClass(),e);
             }
         }
 
@@ -76,6 +76,7 @@ public class ReflectUtil {
             field.setAccessible(access);
         } catch (Exception e) {
             result = false;
+            logger.debug("设置属性异常",e);
         }
 
         return result;
