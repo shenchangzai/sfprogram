@@ -7,8 +7,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public final class JacksonUtil {
+	private JacksonUtil(){}
 	private static final  Logger logger = LoggerFactory.getLogger(JacksonUtil.class);
-	public static ObjectMapper objectMapper;
+	private static ObjectMapper objectMapper;
 
 	/**
 	 * 使用泛型方法，把json字符串转换为相应的JavaBean对象。

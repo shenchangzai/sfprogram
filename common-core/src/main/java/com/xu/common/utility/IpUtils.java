@@ -10,12 +10,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 public class IpUtils {
+	private static final String UNKNOWN="unknown";
     private IpUtils() {
     }
 
     public static String getIpAddr(HttpServletRequest request) {
         if (request == null) {
-            return "unknown";
+            return UNKNOWN;
         }
         String ip = request.getHeader("x-forwarded-for");
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
@@ -60,7 +61,6 @@ public class IpUtils {
             return (new StringBuilder(String.valueOf(address))).append("(").append(ip).append(")").toString();
         }
         catch(Exception e){
-            e.printStackTrace();
         }
         return "";
     }
