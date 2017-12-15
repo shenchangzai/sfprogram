@@ -70,6 +70,7 @@ public class AddressController extends BaseCRUDController<String, Demo, DemoServ
 				it -> new AddressDTO(it.getAreaName(),it.getAreaId(),it.getCityId()))
 				.collect(toList());
 		addressList.addAll(thirdList);
+		
 		return Result.succeed(addressList);
 	}
 	

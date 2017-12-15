@@ -9,23 +9,23 @@ import java.util.regex.Pattern;
  * 浏览器工具类
  */
 public class BrowserUtil {
-
-    private final static String IE11 = "rv:11.0";
-    private final static String IE10 = "MSIE 10.0";
-    private final static String IE9 = "MSIE 9.0";
-    private final static String IE8 = "MSIE 8.0";
-    private final static String IE7 = "MSIE 7.0";
-    private final static String IE6 = "MSIE 6.0";
-    private final static String MAXTHON = "Maxthon";
-    private final static String QQ = "QQBrowser";
-    private final static String GREEN = "GreenBrowser";
-    private final static String SE360 = "360SE";
-    private final static String FIREFOX = "Firefox";
-    private final static String OPERA = "Opera";
-    private final static String CHROME = "Chrome";
-    private final static String SAFARI = "Safari";
-    private final static String CAMINO = "Camino";
-    private final static String OTHER = "其它";
+                         
+    private static final String IE11 = "rv:11.0";
+    private static final String IE10 = "MSIE 10.0";
+    private static final String IE9 = "MSIE 9.0";
+    private static final String IE8 = "MSIE 8.0";
+    private static final String IE7 = "MSIE 7.0";
+    private static final String IE6 = "MSIE 6.0";
+    private static final String MAXTHON = "Maxthon";
+    private static final String QQ = "QQBrowser";
+    private static final String GREEN = "GreenBrowser";
+    private static final String SE360 = "360SE";
+    private static final String FIREFOX = "Firefox";
+    private static final String OPERA = "Opera";
+    private static final String CHROME = "Chrome";
+    private static final String SAFARI = "Safari";
+    private static final String CAMINO = "Camino";
+    private static final String OTHER = "其它";
 
     public final static String GBKENCODE = "GBK";
     public final static String ISO8859ENCODE = "ISO-8859-1";
@@ -45,9 +45,6 @@ public class BrowserUtil {
     static Pattern tablePat = Pattern.compile(tableReg, Pattern.CASE_INSENSITIVE);
 
     private static boolean checkMobile(String userAgent) {
-        if (null == userAgent) {
-            userAgent = "";
-        }
         // 匹配
         Matcher matcherPhone = phonePat.matcher(userAgent);
         Matcher matcherTable = tablePat.matcher(userAgent);

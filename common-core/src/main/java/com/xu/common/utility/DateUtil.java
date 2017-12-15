@@ -8,26 +8,26 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DateUtil {
-	
-	public final static long MILLISECOND_DAY = 1000 * 60 * 60 * 24;
-	public final static String YYYYMMDDHHMMSSSSS = "yyyy-MM-dd HH:mm:ss.SSS";
-	public final static String YYYYMMDDHHMMSS = "yyyy-MM-dd HH:mm:ss";
-	public final static String YYYYMMDDHHMMSS_SHORT = "yyyyMMddHHmmss";
-	public final static String YYYYMMDDHHMMSS_LONG = "yyyy年MM月dd日HH时mm分";
-	public final static String HHMMSS = "HH:mm:ss";
-	public final static String HH = "HH";
-	public final static String HHMM = "HH:mm";
-	public final static String HHMM_SHORT = "HHmm";
-	public final static String YYYYMMDDHH = "yyyy-MM-dd HH";
-	public final static String YYYYMMDDHH_SHORT = "yyyyMMddHH";
-	public final static String YYYYMMDDHHMM_SHORT = "yyyyMMddHHmm";
-	public final static String YYYYMM = "yyyyMM";
-	public final static String YYYYMMDD_SHORT = "yyyyMMdd";
-	public final static String YYYYMMDD = "yyyy-MM-dd";
+	       
+	public static final  long MILLISECOND_DAY = 1000 * 60 * 60 * 24;
+	public static final  String YYYYMMDDHHMMSSSSS = "yyyy-MM-dd HH:mm:ss.SSS";
+	public static final  String YYYYMMDDHHMMSS = "yyyy-MM-dd HH:mm:ss";
+	public static final  String YYYYMMDDHHMMSS_SHORT = "yyyyMMddHHmmss";
+	public static final  String YYYYMMDDHHMMSS_LONG = "yyyy年MM月dd日HH时mm分";
+	public static final  String HHMMSS = "HH:mm:ss";
+	public static final  String HH = "HH";
+	public static final  String HHMM = "HH:mm";
+	public static final  String HHMM_SHORT = "HHmm";
+	public static final  String YYYYMMDDHH = "yyyy-MM-dd HH";
+	public static final  String YYYYMMDDHH_SHORT = "yyyyMMddHH";
+	public static final  String YYYYMMDDHHMM_SHORT = "yyyyMMddHHmm";
+	public static final  String YYYYMM = "yyyyMM";
+	public static final  String YYYYMMDD_SHORT = "yyyyMMdd";
+	public static final  String YYYYMMDD = "yyyy-MM-dd";
 	public static final String YYYYMMDDHHMMSS_REGEXP = "^(?x:(?:[0-9]{1,4}(?<!^0?0?0?0))-(?:0?[1-9]|1[0-2])-(?:0?[1-9]|1[0-9]|2[0-8]|(?:(?<=-(?:0?[13578]|1[02])-)(?:29|3[01]))|(?:(?<=-(?:0?[469]|11)-)(?:29|30))|(?:(?<=(?:(?:[0-9]{0,2}(?!0?0)(?:[02468]?(?<![13579])[048]|[13579][26]))|(?:(?:[02468]?[048]|[13579][26])00))-0?2-)(?:29))))\\s(((0?[0-9])|([1][0-9])|([2][0-3]))\\:([0-5]?[0-9])((\\:([0-5]?[0-9]))))$";// 日期正则表达式
 	public static final String YYYYMMDD_REGEXP = "^(?x:(?:[0-9]{1,4}(?<!^0?0?0?0))-(?:0?[1-9]|1[0-2])-(?:0?[1-9]|1[0-9]|2[0-8]|(?:(?<=-(?:0?[13578]|1[02])-)(?:29|3[01]))|(?:(?<=-(?:0?[469]|11)-)(?:29|30))|(?:(?<=(?:(?:[0-9]{0,2}(?!0?0)(?:[02468]?(?<![13579])[048]|[13579][26]))|(?:(?:[02468]?[048]|[13579][26])00))-0?2-)(?:29))))";
-	public final static String UTC_SHORT = "yyyy-MM-dd'T'HH:mm:ss'Z'";
-	public final static Pattern UTCPattern = Pattern.compile("(?x:(?:[0-9]{1,4}(?<!^0?0?0?0))-(?:0?[1-9]|1[0-2])-(?:0?[1-9]|1[0-9]|2[0-8]|(?:(?<=-(?:0?[13578]|1[02])-)(?:29|3[01]))|(?:(?<=-(?:0?[469]|11)-)(?:29|30))|(?:(?<=(?:(?:[0-9]{0,2}(?!0?0)(?:[02468]?(?<![13579])[048]|[13579][26]))|(?:(?:[02468]?[048]|[13579][26])00))-0?2-)(?:29))))T(((0?[0-9])|([1][0-9])|([2][0-3])):([0-5]?[0-9])((:([0-5]?[0-9]))))((\\.([0-9]{1,3})))Z");
+	public static final  String UTC_SHORT = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+	public static final  Pattern UTCPattern = Pattern.compile("(?x:(?:[0-9]{1,4}(?<!^0?0?0?0))-(?:0?[1-9]|1[0-2])-(?:0?[1-9]|1[0-9]|2[0-8]|(?:(?<=-(?:0?[13578]|1[02])-)(?:29|3[01]))|(?:(?<=-(?:0?[469]|11)-)(?:29|30))|(?:(?<=(?:(?:[0-9]{0,2}(?!0?0)(?:[02468]?(?<![13579])[048]|[13579][26]))|(?:(?:[02468]?[048]|[13579][26])00))-0?2-)(?:29))))T(((0?[0-9])|([1][0-9])|([2][0-3])):([0-5]?[0-9])((:([0-5]?[0-9]))))((\\.([0-9]{1,3})))Z");
 
 	public static final String HHMMSS_REGEXP = "^([0-1][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$";// 时分秒正则表达式
 
