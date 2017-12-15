@@ -10,12 +10,19 @@ import java.io.OutputStream;
 
 import javax.imageio.ImageIO;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.swetake.util.Qrcode;
+import com.xu.common.exception.MlsException;
 
 import jp.sourceforge.qrcode.QRCodeDecoder;
 import jp.sourceforge.qrcode.exception.DecodingFailedException;
 
 public class TwoDimensionCode {
+	
+	private static final Logger logger = LoggerFactory.getLogger(TwoDimensionCode.class);
+	
 	/**
 	 * 生成二维码(QRCode)图片
 	 * 
@@ -89,7 +96,7 @@ public class TwoDimensionCode {
 			// 生成二维码QRCode图片
 			ImageIO.write(bufImg, imgType, imgFile);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("系统异常", e);
 		}
 	}
 
@@ -111,7 +118,7 @@ public class TwoDimensionCode {
 			// 生成二维码QRCode图片
 			ImageIO.write(bufImg, imgType, output);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("系统异常", e);
 		}
 	}
 
@@ -159,12 +166,12 @@ public class TwoDimensionCode {
 					}
 				}
 			} else {
-				throw new Exception("QRCode content bytes length = " + contentBytes.length + " not in [0, 800].");
+				throw new MlsException("QRCode content bytes length = " + contentBytes.length + " not in [0, 800].");
 			}
 			gs.dispose();
 			bufImg.flush();
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("系统异常", e);
 		}
 		return bufImg;
 	}
@@ -186,11 +193,9 @@ public class TwoDimensionCode {
 			QRCodeDecoder decoder = new QRCodeDecoder();
 			content = new String(decoder.decode(new TwoDimensionCodeImage(bufImg)), "utf-8");
 		} catch (IOException e) {
-			System.out.println("Error: " + e.getMessage());
-			e.printStackTrace();
+			logger.error("系统异常", e);
 		} catch (DecodingFailedException dfe) {
-			System.out.println("Error: " + dfe.getMessage());
-			dfe.printStackTrace();
+			logger.error("系统异常", dfe);
 		}
 		return content;
 	}
@@ -210,25 +215,10 @@ public class TwoDimensionCode {
 			QRCodeDecoder decoder = new QRCodeDecoder();
 			content = new String(decoder.decode(new TwoDimensionCodeImage(bufImg)), "utf-8");
 		} catch (IOException e) {
-			System.out.println("Error: " + e.getMessage());
-			e.printStackTrace();
+			logger.error("系统异常", e);
 		} catch (DecodingFailedException dfe) {
-			System.out.println("Error: " + dfe.getMessage());
-			dfe.printStackTrace();
+			logger.error("系统异常", dfe);
 		}
 		return content;
-	}
-
-	public static void main(String[] args) {
-		String imgPath = "D:/aaa/Michael_QRCode.png";
-		String encoderContent = "http://60.28.201.37:8380/QrCodeLoginPro/Login.html";
-		TwoDimensionCode handler = new TwoDimensionCode();
-		handler.encoderQRCode(encoderContent, imgPath, "png");
-		/*
-		 * System.out.println("========encoder success"); String decoderContent
-		 * = handler.decoderQRCode(imgPath); System.out.println("解析结果如下：");
-		 * System.out.println(decoderContent); System.out.println(
-		 * "========decoder success!!!");
-		 */
 	}
 }
