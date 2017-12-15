@@ -6,7 +6,7 @@
 		<result column="MKT_ID" property="mktId" jdbcType="VARCHAR" />
 		<result column="TEAM_NAME" property="teamName" jdbcType="VARCHAR" />
 		<result column="STATUS" property="status" jdbcType="CHAR" />
-		<result column="END_TIME" property="endTime" jdbcType="Long" />
+		<result column="END_TIME" property="endTime" jdbcType="BIGINT" />
 		<result column="CT_NUM" property="ctNum" jdbcType="INTEGER" />
 		<result column="CRT_TIME" property="crtTime" jdbcType="DATE" />
 	</resultMap>
