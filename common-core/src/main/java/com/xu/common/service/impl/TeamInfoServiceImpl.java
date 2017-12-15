@@ -51,9 +51,7 @@ public class TeamInfoServiceImpl extends AbstractCRUDBaseService<String, TtTeam,
 		Map<String, Object> map=new HashMap<>();
 		BeanMapUtil.beanToMap(ttTeam, map);
 		BeanMapUtil.beanToMap(proMarketBase, map);
-		if(null!=map &&  null!=map.get(endTimeKey)){
-			map.put(endTimeKey, DateUtil.getTimeStringByLong(Long.parseLong(map.get(endTimeKey).toString()))); 
-		}
+		map.put(endTimeKey, DateUtil.getTimeStringByLong(Long.parseLong(map.get(endTimeKey).toString()))); 
 		
 		return map;
 	}
