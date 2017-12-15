@@ -28,7 +28,7 @@ public final class JacksonUtil {
 		try {
 			return objectMapper.readValue(jsonStr, valueType);
 		} catch (Exception e) {
-			logger.warn("转换发生错误:"+e.getMessage());
+			logger.warn("泛型方法转换发生错误:",e);
 		}
 
 		return null;
@@ -48,7 +48,7 @@ public final class JacksonUtil {
 		try {
 			return objectMapper.readValue(jsonStr, valueTypeRef);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warn("json数组转List转换发生错误:",e);
 		}
 
 		return null;
@@ -68,7 +68,7 @@ public final class JacksonUtil {
 		try {
 			return objectMapper.writeValueAsString(object);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warn("JavaBean转换为json字符串发生错误:",e);
 		}
 
 		return null;
