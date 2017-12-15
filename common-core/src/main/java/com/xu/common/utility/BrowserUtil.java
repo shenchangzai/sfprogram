@@ -9,7 +9,8 @@ import java.util.regex.Pattern;
  * 浏览器工具类
  */
 public class BrowserUtil {
-                         
+                  
+	private BrowserUtil(){}
     private static final String IE11 = "rv:11.0";
     private static final String IE10 = "MSIE 10.0";
     private static final String IE9 = "MSIE 9.0";
@@ -27,8 +28,6 @@ public class BrowserUtil {
     private static final String CAMINO = "Camino";
     private static final String OTHER = "其它";
 
-    public final static String GBKENCODE = "GBK";
-    public final static String ISO8859ENCODE = "ISO-8859-1";
     // \b 是单词边界(连着的两个(字母字符 与 非字母字符) 之间的逻辑上的间隔),
     // 字符串在编译时会被转码一次,所以是 "\\b"
     // \B 是单词内部逻辑间隔(连着的两个字母字符之间的逻辑上的间隔)
