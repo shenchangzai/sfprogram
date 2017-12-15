@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xu.common.dao.CityDao">
+	<resultMap id="bean" type="com.xu.common.model.City">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="CITY_ID"   		property="cityId"     jdbcType="VARCHAR" />
+		<result column="CITY_NAME" 		property="cityName"   jdbcType="VARCHAR" />
+		<result column="PROVINCE_ID" 	property="provinceId" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="getCitiesByProvinceId" parameterType="String" resultMap="bean" >
+		select city_id,city_name,province_id from city 
+		where  province_id =#{provinceId}
+	</select>
+	
+	<select id="getCities" resultMap="bean" >
+		select city_id,city_name,province_id from city
+	</select>	
+</mapper>
