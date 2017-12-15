@@ -5,4 +5,6 @@ import com.xu.common.model.TeamRule;
 public interface TeamRuleService extends BaseCRUDService<String, TeamRule> {
 
 	public TeamRule getTeamRule(String mktId,String rule);
+	
+	public int updateRule(String mktId,String rule);
 }

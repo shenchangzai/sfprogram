@@ -11,5 +11,7 @@ public interface AnybusService extends BaseCRUDService<String, Anybus>{
 	 * @return
 	 */
 	public List<Anybus> getMkt();
+	
+	public int updateBaseLog(String mktId,long lastTime);
 
 }

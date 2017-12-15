@@ -15,4 +15,10 @@ public class TeamRuleServiceImpl extends AbstractCRUDBaseService<String, TeamRul
 		return dao.getTeamRule(mktId,rule);
 	}
 
+	@Override
+	public int updateRule(String mktId, String rule) {
+		dao.updateRule(mktId, rule);
+		return 0;
+	}
+
 }

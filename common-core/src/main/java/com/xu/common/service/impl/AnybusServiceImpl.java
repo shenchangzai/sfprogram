@@ -16,5 +16,9 @@ public class AnybusServiceImpl extends AbstractCRUDBaseService<String, Anybus, A
 	public List<Anybus> getMkt() {
 		return dao.getMkt();
 	}
+	
+	public int updateBaseLog(String mktId,long lastTime){
+		return dao.updateBaseLog(mktId, lastTime);
+	}
 
 }

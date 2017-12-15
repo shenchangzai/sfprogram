@@ -103,7 +103,6 @@ public abstract class AbstractCRUDBaseService<PK extends Serializable,M extends 
     
     @Override
     public String getProperty(String key) {
-    	// TODO Auto-generated method stub
     	return propertyConfigurer.getProperty(key);
     }
 }
