@@ -43,18 +43,4 @@ public class TeamInfoController extends BaseCRUDController<String, TtTeam, TeamI
 			return Result.error("1", e.getMessage());
 		}
 	}
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	@ResponseStatus(HttpStatus.OK)
-	@ApiOperation(value = "获取集货团列表")
-	public Result test(){
-		try {
-			TtTeam ttTeam=new TtTeam();
-			ttTeam.setMktId("123wqwesafd");
-			ttTeam.setStatus("1");
-			return Result.succeed(service.getTtTeamByMktId(ttTeam));
-		} catch (MlsException e) {
-			logger.info("获取集货团列表失败,原因:",e);
-			return Result.error("1", e.getMessage());
-		}
-	}
 }
