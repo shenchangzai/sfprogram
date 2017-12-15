@@ -9,8 +9,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.xu.common.controller.TeamUserController;
+
 public class IpUtils {
-	private static final String UNKNOWN="unknown";
+	private static final String UNKNOWN= "unknown";
+	private static final Logger logger = LoggerFactory.getLogger(IpUtils.class);
     private IpUtils() {
     }
 
@@ -61,6 +67,7 @@ public class IpUtils {
             return (new StringBuilder(String.valueOf(address))).append("(").append(ip).append(")").toString();
         }
         catch(Exception e){
+        	logger.error("getServerIpAddr异常",e);
         }
         return "";
     }
