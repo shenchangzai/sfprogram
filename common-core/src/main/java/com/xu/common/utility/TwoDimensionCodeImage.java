@@ -5,7 +5,6 @@ import jp.sourceforge.qrcode.data.QRCodeImage;
 
 public class TwoDimensionCodeImage implements QRCodeImage {
 	BufferedImage bufImg;
-
 	public TwoDimensionCodeImage(BufferedImage bufImg) {
 		this.bufImg = bufImg;
 	}

@@ -27,7 +27,6 @@ public class TwoDimensionCode {
 	public void encoderQRCode(String content, String imgPath) {
 		this.encoderQRCode(content, imgPath, "png", 7);
 	}
-
 	/**
 	 * 生成二维码(QRCode)图片
 	 * 

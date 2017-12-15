@@ -38,5 +38,4 @@ public class ImageCode implements BaseModel<String>{
 	public void setId(String id) {
 		
 	}
-	
 }

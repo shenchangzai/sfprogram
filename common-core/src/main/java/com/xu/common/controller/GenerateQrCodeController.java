@@ -53,6 +53,7 @@ public class GenerateQrCodeController extends BaseCRUDController<String, Demo, D
 		obj.setQrCodeImg(qrCodeImg);
 		return Result.succeed(obj);
 	}
+	
 	@RequestMapping(value = "/download/{fileid}", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	@ApiOperation(value = "下载文件")
