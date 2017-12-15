@@ -25,6 +25,7 @@ import com.xu.common.model.ImageCode;
 import com.xu.common.model.Result;
 import com.xu.common.service.DemoService;
 import com.xu.common.utility.TwoDimensionCode;
+import com.xu.common.utility.UUIDUtil;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -38,7 +39,7 @@ public class GenerateQrCodeController extends BaseCRUDController<String, Demo, D
 	@ApiOperation(value = "生成二维码图片")
 	public Result generateQrCode(@ApiParam(value = "当前目录", required = true) @PathVariable("teamId") String teamId){
 		// 生成唯一ID
-		int uuid = (int) (Math.random()* 100000);
+		String uuid = UUIDUtil.getUUID();
 		ApplicationConfig config=new ApplicationConfig();
 		String contextPath=config.getProperty("server.domain")+"/#/teamDetail?id="+teamId;
 		// 生成二维码

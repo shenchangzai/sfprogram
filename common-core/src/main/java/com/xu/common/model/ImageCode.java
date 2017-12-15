@@ -8,16 +8,16 @@ public class ImageCode implements BaseModel<String>{
 	 */
 	private static final long serialVersionUID = -4066984916469733217L;
 
-	private int uuid;
+	private String uuid;
 	
 	private String qrCodeImg;
 
 
-	public int getUuid() {
+	public String getUuid() {
 		return uuid;
 	}
 
-	public void setUuid(int uuid) {
+	public void setUuid(String uuid) {
 		this.uuid = uuid;
 	}
 
