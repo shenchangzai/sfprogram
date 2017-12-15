@@ -5,6 +5,10 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+import javax.annotation.Resource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,11 +19,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.xu.common.model.Demo;
 import com.xu.common.model.Result;
+import com.xu.common.service.AnybusService;
 import com.xu.common.service.DemoService;
 
 @RestController
 @RequestMapping("/demo")
 public class DemoController extends BaseCRUDController<String, Demo, DemoService>{
+	
+	protected Logger logger = LoggerFactory.getLogger(getClass());
+	
+	@Resource
+	public AnybusService anybusService;
+	
 	
 	/**
 	 * 
@@ -33,7 +44,8 @@ public class DemoController extends BaseCRUDController<String, Demo, DemoService
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "新增成功"), @ApiResponse(code = 400, message = "参数错误") })
 	public Result createFolder(@ApiParam(value = "当前目录", required = true) @PathVariable("currentFolder") String currentFolder, 
 			@ApiParam(value = "文件夹名", required = false) @RequestParam(value = "newFolderName", required = false) String newFolderName) {
-		return Result.succeed(service.getDemo());
+		logger.info(service.getProperty("scss.nas.path.static"));
+		return Result.succeed(anybusService.getUserAge("123"));
 	}
 	
 	@RequestMapping(value = "/list/{key}", method = RequestMethod.GET)
