@@ -20,11 +20,9 @@ import com.xu.common.utility.DateUtil;
 public class TeamInfoServiceImpl extends AbstractCRUDBaseService<String, TtTeam, TtTeamDao> implements TeamInfoService {
 	@Resource
 	ProMarketBaseDao proMarketBaseDao;    
-	@Resource
-	TtTeamDao ttTeamDao;
 	public Map<String,Object> getTeamInfo(String teamId) throws MlsException{
 		String endTimeKey="endTime";
-		TtTeam  ttTeam=ttTeamDao.getTtTeam(teamId);
+		TtTeam  ttTeam=dao.getTtTeam(teamId);
 		if(null==ttTeam){
 			throw new MlsException("根据集货团ID查找不到对应的集货信息,请查证后再试!");
 		}
@@ -42,8 +40,11 @@ public class TeamInfoServiceImpl extends AbstractCRUDBaseService<String, TtTeam,
 	}
 
 	
-	@Override
 	public void insertTeam(TtTeam ttTeam) throws MlsException {
-		ttTeamDao.insert(ttTeam);
+		dao.insert(ttTeam);
+	}
+	
+	public void updateTeam(TtTeam ttTeam)  throws MlsException {
+		 dao.update(ttTeam);
 	}
 }

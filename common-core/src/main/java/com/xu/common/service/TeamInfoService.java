@@ -11,4 +11,6 @@ public interface TeamInfoService extends BaseCRUDService<String, TtTeam>{
 	public Map<String,Object> getTeamInfo(String teamId) throws MlsException;
 	
 	public void insertTeam(TtTeam ttTeam) throws MlsException;
+	
+	public void updateTeam(TtTeam ttTeam) throws MlsException;
 }

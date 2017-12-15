@@ -18,5 +18,10 @@
 		insert into TT_TEAM(MKT_ID,TEAM_ID,TEAM_NAME,STATUS,END_TIME,CT_NUM,CRT_TIME) 
 		VALUES (#{mktId},#{teamId},#{teamName},#{status},#{endTime},#{ctNum},sysdate)
 	</select>
+	
+	<select id="update" parameterType="com.xu.common.model.TtTeam">
+		update TT_TEAM set STATUS=#{status} where TEAM_ID=#{teamId}
+	</select>
+	
 </mapper>
 

@@ -21,10 +21,6 @@ import com.xu.common.service.TeamInfoService;
 @RequestMapping("/teamInfo")
 public class TeamInfoController extends BaseCRUDController<String, TtTeam, TeamInfoService>{
 	
-	protected Logger logger = LoggerFactory.getLogger(getClass());
-	
-	
-	
 	@RequestMapping(value = "/{teamId}", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.OK)
 	@ApiOperation(value = "获取集货团详情")
@@ -36,8 +32,5 @@ public class TeamInfoController extends BaseCRUDController<String, TtTeam, TeamI
 			logger.info("获取集货团详情失败,原因:",e);
 			return Result.error("1", e.getMessage());
 		}
-		
-		
 	}
-
 }
