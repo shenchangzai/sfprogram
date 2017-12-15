@@ -78,8 +78,7 @@ public class TeamUserController extends BaseCRUDController<String, Demo, DemoSer
 				return Result.error("7012", "团满提示", NO_SEND_WEIGHT);
 			}
 			// 3 报名集货
-			teamUserService.addTeamUser(teamUser);
-			
+			teamUserService.addTeamUser(teamUser);			
 		} catch (MlsException e) {
 			logger.error("报名集货异常",e);
 			return Result.error("7013","报名集货异常");
