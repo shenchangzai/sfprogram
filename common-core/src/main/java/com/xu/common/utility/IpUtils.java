@@ -62,8 +62,8 @@ public class IpUtils {
     public static String getServerIpAddr(){
         try{
             InetAddress addr = InetAddress.getLocalHost();
-            String ip = addr.getHostAddress().toString();
-            String address = addr.getHostName().toString();
+            String ip = addr.getHostAddress();
+            String address = addr.getHostName();
             return (new StringBuilder(String.valueOf(address))).append("(").append(ip).append(")").toString();
         }
         catch(Exception e){

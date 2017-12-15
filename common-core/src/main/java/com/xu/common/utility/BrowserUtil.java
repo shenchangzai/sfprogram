@@ -139,7 +139,7 @@ public class BrowserUtil {
     }
 
     private static boolean getBrowserType(HttpServletRequest request, String browserType) {
-        return getUserAgent(request).indexOf(browserType) > 0 ? true : false;
+        return getUserAgent(request).indexOf(browserType) > 0;
     }
 
 

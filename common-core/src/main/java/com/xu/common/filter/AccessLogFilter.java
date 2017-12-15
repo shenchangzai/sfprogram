@@ -47,9 +47,6 @@ public class AccessLogFilter extends BaseFilter {
 	}
 
 	public static String getBlock(String key, Object msg) {
-		if (msg == null) {
-			msg = "";
-		}
 		return "\"" + key + "\":[" + msg.toString() + "]";
 	}
 
