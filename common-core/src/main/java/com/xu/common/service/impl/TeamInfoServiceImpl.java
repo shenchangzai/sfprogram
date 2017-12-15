@@ -19,7 +19,7 @@ import com.xu.common.service.TeamInfoService;
 @Service
 public class TeamInfoServiceImpl extends AbstractCRUDBaseService<String, TtTeam, TtTeamDao> implements TeamInfoService {
 	@Resource
-	ProMarketBaseDao proMarketBaseDao;
+	ProMarketBaseDao proMarketBaseDao;    
 	@Resource
 	TtTeamDao ttTeamDao;
 	public Map<String,Object> getTeamInfo(String teamId) throws Exception{
@@ -52,4 +52,8 @@ public class TeamInfoServiceImpl extends AbstractCRUDBaseService<String, TtTeam,
 	    }  
 	    return map;  
 	} 
+	@Override
+	public void insertTeam(TtTeam ttTeam) throws Exception {
+		ttTeamDao.insert(ttTeam);
+	}
 }
