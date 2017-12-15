@@ -26,7 +26,6 @@ import com.xu.common.service.DemoService;
 @RequestMapping("/demo")
 public class DemoController extends BaseCRUDController<String, Demo, DemoService>{
 	
-	protected Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Resource
 	public AnybusService anybusService;
@@ -52,7 +51,6 @@ public class DemoController extends BaseCRUDController<String, Demo, DemoService
 	@ResponseStatus(HttpStatus.OK)
 	@ApiOperation(value = "创建文件夹")
 	public Result getkey(@ApiParam(value = "当前目录", required = true) @PathVariable("key") String key){
-		System.out.println("");
 		return Result.succeed(service.getDemo(key));
 	}
 	

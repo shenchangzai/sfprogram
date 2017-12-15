@@ -1,5 +1,6 @@
 package com.xu.common.service.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -20,6 +21,7 @@ import com.xu.common.utility.DateUtil;
 public class TeamInfoServiceImpl extends AbstractCRUDBaseService<String, TtTeam, TtTeamDao> implements TeamInfoService {
 	@Resource
 	ProMarketBaseDao proMarketBaseDao;    
+	
 	public Map<String,Object> getTeamInfo(String teamId) throws MlsException{
 		String endTimeKey="endTime";
 		TtTeam  ttTeam=dao.getTtTeam(teamId);
@@ -39,6 +41,17 @@ public class TeamInfoServiceImpl extends AbstractCRUDBaseService<String, TtTeam,
 		return map;
 	}
 
+	/**
+	 * 根据专业市场ID和状态查询集货团信息
+	 */
+	public TtTeam getTtTeamByMktId(TtTeam ttTeam) throws MlsException {
+		return dao.getTtTeamByMktId(ttTeam);
+	}
+	
+	
+	public List<TtTeam> getTtTeamList() throws MlsException {
+		return dao.getTtTeamList();
+	}
 	
 	public void insertTeam(TtTeam ttTeam) throws MlsException {
 		dao.insert(ttTeam);

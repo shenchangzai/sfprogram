@@ -14,6 +14,10 @@
 		select MKT_ID,TEAM_ID,TEAM_NAME,STATUS,END_TIME,CT_NUM,CRT_TIME from TT_TEAM where TEAM_ID = #{teamId}
 	</select>
 	
+	<select id="getTtTeamByMktId" resultMap="bean" >
+		select MKT_ID,TEAM_ID,TEAM_NAME,STATUS,END_TIME,CT_NUM,CRT_TIME from TT_TEAM where MKT_ID = #{mktId} and STATUS=#{status} and rownum=1
+	</select>
+	
 	<select id="insert" parameterType="com.xu.common.model.TtTeam">
 		insert into TT_TEAM(MKT_ID,TEAM_ID,TEAM_NAME,STATUS,END_TIME,CT_NUM,CRT_TIME) 
 		VALUES (#{mktId},#{teamId},#{teamName},#{status},#{endTime},#{ctNum},sysdate)
@@ -21,6 +25,10 @@
 	
 	<select id="update" parameterType="com.xu.common.model.TtTeam">
 		update TT_TEAM set STATUS=#{status} where TEAM_ID=#{teamId}
+	</select>
+	
+	<select id="getTtTeamList" resultMap="bean" >
+		select MKT_ID,TEAM_ID,TEAM_NAME,STATUS,END_TIME,CT_NUM,CRT_TIME from TT_TEAM order by CRT_TIME desc
 	</select>
 	
 </mapper>

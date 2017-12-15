@@ -1,6 +1,7 @@
 package com.xu.common.service;
 
 
+import java.util.List;
 import java.util.Map;
 
 import com.xu.common.exception.MlsException;
@@ -13,4 +14,8 @@ public interface TeamInfoService extends BaseCRUDService<String, TtTeam>{
 	public void insertTeam(TtTeam ttTeam) throws MlsException;
 	
 	public void updateTeam(TtTeam ttTeam) throws MlsException;
+	
+	public List<TtTeam> getTtTeamList() throws MlsException;
+	
+	public TtTeam getTtTeamByMktId(TtTeam ttTeam) throws MlsException;
 }
