@@ -12,7 +12,6 @@ import com.xu.common.service.AnybusService;
 @Service
 public class AnybusServiceImpl extends AbstractCRUDBaseService<String, Anybus, AnybusDao> implements AnybusService {
 
-	@Override
 	public List<Anybus> getMkt() {
 		return dao.getMkt();
 	}

@@ -48,8 +48,12 @@ public class MarketBaseTask {
 					ttTeam.setMktId(mkt.getMktId());
 					ttTeam.setStatus(CommonContants.STATUS_INIT);
 					ttTeam = teamInfoService.getTtTeamByMktId(ttTeam);
-					if (sysTime >= ttTeam.getEndTime()) {
+					if (sysTime >= ttTeam.getEndTime()) {//开团超时
 						ttTeam.setStatus(CommonContants.STATUS_ERR);
+						teamInfoService.updateTeam(ttTeam);
+						teamInfoService.createTeam(mkt);
+					}else if (mkt.getGroupLimit() == ttTeam.getCtNum()){//开团完成
+						ttTeam.setStatus(CommonContants.STATUS_END);
 						teamInfoService.updateTeam(ttTeam);
 						teamInfoService.createTeam(mkt);
 					}
@@ -60,7 +64,6 @@ public class MarketBaseTask {
 				logger.error(e.getMessage(), e);
 			}
 		}
-
 	}
 
 }

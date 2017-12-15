@@ -12,6 +12,12 @@ public interface AnybusService extends BaseCRUDService<String, Anybus>{
 	 */
 	public List<Anybus> getMkt();
 	
+	/**
+	 * 根据集货ID更新下次开团时间
+	 * @param mktId
+	 * @param lastTime
+	 * @return
+	 */
 	public int updateBaseLog(String mktId,long lastTime);
 
 }
