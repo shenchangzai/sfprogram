@@ -15,7 +15,8 @@
 	</select>
 	
 	<select id="insert" parameterType="com.xu.common.model.TtTeam">
-		insert into TT_TEAM(MKT_ID,TEAM_ID,TEAM_NAME,STATUS,END_TIME,CT_NUM,CRT_TIME) VALUES (#mktId#,#teamId#,#teamName#,#status#,#endTime#,#ctNum#,sysdate)
+		insert into TT_TEAM(MKT_ID,TEAM_ID,TEAM_NAME,STATUS,END_TIME,CT_NUM,CRT_TIME) 
+		VALUES (#{mktId},#{teamId},#{teamName},#{status},#{endTime},#{ctNum},sysdate)
 	</select>
 </mapper>
 
