@@ -69,10 +69,6 @@ public class BrowserUtil {
         return checkMobile(userAgent);
     }
 
-    // 判断是否是IE
-    public static boolean isIE(HttpServletRequest request) {
-        return (getUserAgent(request).toLowerCase().indexOf("msie") > 0 || getUserAgent(request).toLowerCase().indexOf("rv:11.0") > 0) ? true : false;
-    }
 
     /**
      * 获取IE版本
