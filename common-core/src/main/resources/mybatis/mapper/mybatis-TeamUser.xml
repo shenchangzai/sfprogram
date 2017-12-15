@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xu.common.dao.TeamUserDao">
+	<resultMap id="bean" type="com.xu.common.model.TeamUser">
+		<result column="TEAM_ID"   		property="teamId"     jdbcType="VARCHAR" />
+		<result column="USER_ID" 		property="userId"     jdbcType="VARCHAR" />
+		<result column="USER_BQ"   		property="userBq"     jdbcType="VARCHAR" />
+		<result column="USER_ADD" 		property="userAdd"    jdbcType="VARCHAR" />
+		<result column="SEND_USER"  	property="sendUser"   jdbcType="VARCHAR" />
+		<result column="SEND_PH" 		property="sendPh"     jdbcType="VARCHAR" />
+		<result column="SEND_NUM"   	property="sendNum"    jdbcType="BIGINT" />
+		<result column="SEND_WEIGHT" 	property="sendWeight" jdbcType="DOUBLE" />
+	</resultMap>
+	
+	<!-- 新增任务人员 -->
+	<insert id="addTeamUser" parameterType="com.xu.common.model.TeamUser">
+		insert into TT_TEAM_USER (
+			TEAM_ID ,
+			USER_ID,
+			USER_BQ ,
+			USER_ADD ,
+			SEND_USER ,
+			SEND_PH,
+			SEND_NUM,
+			SEND_WEIGHT
+		) values (
+			#{teamId,jdbcType=VARCHAR},
+			#{userId,jdbcType=VARCHAR},
+			#{userBq,jdbcType=VARCHAR},
+			#{userAdd,jdbcType=VARCHAR},
+			#{sendUser,jdbcType=VARCHAR},
+			#{sendPh,jdbcType=VARCHAR},
+			#{sendNum,jdbcType=INTEGER},
+			#{sendWeight,jdbcType=DOUBLE}
+		)
+	</insert>	
+</mapper>

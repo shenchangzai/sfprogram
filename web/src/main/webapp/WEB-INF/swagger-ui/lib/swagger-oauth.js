@@ -233,7 +233,6 @@ window.onOAuthComplete = function onOAuthComplete(token) {
       checkbox.each(function(pos){
         checkbox[pos].checked = false;
       });
-      alert(token.error);
     }
     else {
       var b = token[window.swaggerUi.tokenName];

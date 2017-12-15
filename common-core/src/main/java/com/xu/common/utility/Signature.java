@@ -40,16 +40,4 @@ public class Signature {
 		}
 		return values.toString();
 	}
-	
-	public static void main(String[] args) throws InvalidKeyException, NoSuchAlgorithmException {
-//		Map<String,String> params = new HashMap<String,String>();
-//		params.put("foo", "bar");
-//		params.put("dummy", "duck");
-//		params.put("ts", "1442374528");UL7r5prOV4y12IfUsJMLBtDCv3k
-//		String sortedValues = Signature.getSortedValuesString(params);
-		String signaturedString = Signature.getHmacSHA1Signature("db1ccbfca0971932ecda02ddd051c0a6", "test11");
-		System.out.println(signaturedString + "UL7r5prOV4y12IfUsJMLBtDCv3k=".equals(signaturedString));
-	}
-	
-	
 }

@@ -2,8 +2,6 @@
 
 import java.util.Date;
 
-import org.apache.ibatis.type.JdbcType;
-
 /**
  * 集货团基本信息表
  * @author 194129
@@ -39,7 +37,7 @@ public class TtTeam implements BaseModel<String>{
 	/**
 	 * 已参团人数
 	 */
-	private Integer ctNum;
+	private int ctNum;
 	/**
 	 * 创建时间
 	 */
@@ -76,10 +74,10 @@ public class TtTeam implements BaseModel<String>{
 	public void setEndTime(Long endTime) {
 		this.endTime = endTime;
 	}
-	public Integer getCtNum() {
+	public int getCtNum() {
 		return ctNum;
 	}
-	public void setCtNum(Integer ctNum) {
+	public void setCtNum(int ctNum) {
 		this.ctNum = ctNum;
 	}
 	public Date getCrtTime() {
@@ -97,12 +95,10 @@ public class TtTeam implements BaseModel<String>{
 	}
 	@Override
 	public String getId() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
 	public void setId(String id) {
-		// TODO Auto-generated method stub
 		
 	}
 }

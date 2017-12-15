@@ -12,9 +12,12 @@ import com.xu.common.service.AnybusService;
 @Service
 public class AnybusServiceImpl extends AbstractCRUDBaseService<String, Anybus, AnybusDao> implements AnybusService {
 
-	@Override
 	public List<Anybus> getMkt() {
 		return dao.getMkt();
+	}
+	
+	public int updateBaseLog(String mktId,long lastTime){
+		return dao.updateBaseLog(mktId, lastTime);
 	}
 
 }

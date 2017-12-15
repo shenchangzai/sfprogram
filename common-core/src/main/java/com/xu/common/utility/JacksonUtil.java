@@ -7,8 +7,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public final class JacksonUtil {
+	private JacksonUtil(){}
 	private static final  Logger logger = LoggerFactory.getLogger(JacksonUtil.class);
-	public static ObjectMapper objectMapper;
+	private static ObjectMapper objectMapper;
 
 	/**
 	 * 使用泛型方法，把json字符串转换为相应的JavaBean对象。
@@ -28,7 +29,7 @@ public final class JacksonUtil {
 		try {
 			return objectMapper.readValue(jsonStr, valueType);
 		} catch (Exception e) {
-			logger.warn("转换发生错误:"+e.getMessage());
+			logger.warn("泛型方法转换发生错误:",e);
 		}
 
 		return null;
@@ -48,7 +49,7 @@ public final class JacksonUtil {
 		try {
 			return objectMapper.readValue(jsonStr, valueTypeRef);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warn("json数组转List转换发生错误:",e);
 		}
 
 		return null;
@@ -68,7 +69,7 @@ public final class JacksonUtil {
 		try {
 			return objectMapper.writeValueAsString(object);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warn("JavaBean转换为json字符串发生错误:",e);
 		}
 
 		return null;

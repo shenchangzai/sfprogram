@@ -17,13 +17,13 @@
 		VALUES(#{mktId},#{rule},#{incr})
 	</insert>
 	
-	<update id="update" parameterType="com.xu.common.model.TeamRule" >
+	<update id="updateRule" >
 		UPDATE
 		TT_TEAM_RULE
 		SET
 		incr = incr+1
-		WHERE MKT_ID = #{mktId}
-		AND RULE = #{rule}
+		WHERE MKT_ID = #{mktIdtm}
+		AND RULE = #{ruletm}
 	</update>
 	
 </mapper>
