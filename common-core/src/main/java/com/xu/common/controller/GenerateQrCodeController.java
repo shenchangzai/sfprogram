@@ -83,7 +83,7 @@ public class GenerateQrCodeController extends BaseCRUDController<String, Demo, D
 	              bos.flush();
 	           }
 	        } catch (Exception e) {
-	        	logger.info(e.getMessage());
+	        	logger.info("异常",e);
 	        } finally {
 	           if (bis != null) {
 	              bis.close();
