@@ -10,5 +10,5 @@ public interface AnybusDao extends BaseCRUDDao<String, Anybus>{
 
 	public List<Anybus> getMkt();
 	
-	public int updateBaseLog(@Param("mktId")String mktId,@Param("lastTime")String lastTime);
+	public int updateBaseLog(@Param("mktId")String mktId,@Param("lastTime")long lastTime);
 }
