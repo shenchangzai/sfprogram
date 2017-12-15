@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mysql.cj.core.util.StringUtils;
+import com.xu.common.exception.MlsException;
 import com.xu.common.model.Demo;
 import com.xu.common.model.Result;
 import com.xu.common.model.TeamUser;
 import com.xu.common.service.DemoService;
 import com.xu.common.service.TeamInfoService;
 import com.xu.common.service.TeamUserService;
+import com.xu.common.utility.UUIDUtil;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -57,43 +59,57 @@ public class TeamUserController extends BaseCRUDController<String, Demo, DemoSer
 	@ApiOperation(value = "报名集货")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "报名集货成功"), @ApiResponse(code = 400, message = "报名集货错误") })
 	public Result getProvinces(@RequestBody TeamUser teamUser) {
-		// 1 核心参数校验
-		String checkResult = checkParam(teamUser);
-		if(!StringUtils.isNullOrEmpty(checkResult)){
-			Result.error("7009", "自定义提示", checkResult);
-		}
-		// 2 报名集货
-		teamUserService.addTeamUser(teamUser);
+		try {
+			// 1 核心参数校验
+			teamUser.setUserId(UUIDUtil.getUUID());// 设置用户
+			String checkResult = checkParamIsEmpty(teamUser); // 参数为空校验
+			if(!StringUtils.isNullOrEmpty(checkResult)){
+				return Result.error("7009", "参数为空自定义提示", checkResult);
+			}
+			// 2逻辑数据校验
+			if(!checkMobile(teamUser.getSendPh())){ // 校验 移动 联通 电信 手机号格式
+				return Result.error("7010", "自定义提示", NOT_RIGHT_SEND_PH);
+			}
+			Map<String, Object> map = teamInfoService.getTeamInfo(teamUser.getTeamId());
+			if(!checkDailyMinPackages(teamUser,map)){ // 动态校验客户快递件数是否达标
+				return Result.error("7011", "自定义提示", NO_SEND_WEIGHT);
+			}
+			if(!checkGoupStatus(map)){ // 校验团满
+				return Result.error("7012", "团满提示", NO_SEND_WEIGHT);
+			}
+			// 3 报名集货
+			teamUserService.addTeamUser(teamUser);
+			
+		} catch (MlsException e) {
+			logger.error("报名集货异常",e);
+			return Result.error("7013","报名集货异常");
+		}		
 		return Result.succeed(true);
 	}
 	
 	/**
-	 * 报名集货参数校验
-	 * @param:  teamUser     
-	 * @return: String
+	 * 判断团满
+	 * @param:  map    
+	 * @return: boolean
 	 */
-	private String checkParam(TeamUser teamUser){
-		String emptyError = checkParamIsEmpty(teamUser); // 1 校验参数是否为空
-		if(!StringUtils.isNullOrEmpty(emptyError)){
-			return emptyError;
+	private boolean checkGoupStatus(Map<String,Object> map){
+		int groupLimit = (int) map.get("groupLimit"); // 团人员限定
+		int ctNum = (int) map.get("ctNum"); // 当前用户数
+		if(ctNum==groupLimit){
+			return false;
+		}else{
+			return true;
 		}
-		if(!checkMobile(teamUser.getSendPh())){ // 校验 移动 联通 电信 手机号格式
-			return NOT_RIGHT_SEND_PH;
-		}
-		if(!checkDailyMinPackages(teamUser)){ // 动态校验客户快递件数是否达标
-			return NO_SEND_WEIGHT;
-		}
-		return null;
 	}
 	
 	/**
 	 * 动态校验客户快递件数是否达标
-	 * @param:  teamUser      
+	 * @param:  teamUser 
+	 * @param:  map 团购单基本详情
 	 * @return: boolean true：合格  false：不合格
 	 */
-	private boolean checkDailyMinPackages(TeamUser teamUser){
+	private boolean checkDailyMinPackages(TeamUser teamUser,Map<String,Object> map){
 		try {
-			Map<String,Object> map = teamInfoService.getTeamInfo(teamUser.getTeamId());
 			int dailyMinPackages = (int) map.get("dailyMinPackages");
 			if(teamUser.getSendNum()<dailyMinPackages){
 				return false;
