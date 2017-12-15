@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xu.common.dao.TtTeamDao">
+	<resultMap id="bean" type="com.xu.common.model.TtTeam">
+		<id column="TEAM_ID" property="teamId" jdbcType="VARCHAR" />
+		<result column="MKT_ID" property="mktId" jdbcType="VARCHAR" />
+		<result column="TEAM_NAME" property="teamName" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="CHAR" />
+		<result column="END_TIME" property="endTime" jdbcType="Long" />
+		<result column="CT_NUM" property="ctNum" jdbcType="INTEGER" />
+		<result column="CRT_TIME" property="crtTime" jdbcType="DATE" />
+	</resultMap>
+	<select id="getTtTeam" resultMap="bean" >
+		select MKT_ID,TEAM_ID,TEAM_NAME,STATUS,END_TIME,CT_NUM,CRT_TIME from TT_TEAM where TEAM_ID = #{teamId}
+	</select>
+	
+	<select id="insertTtTeam" type="com.xu.common.model.TtTeam">
+		insert TT_TEAM(MKT_ID,TEAM_ID,TEAM_NAME,STATUS,END_TIME,CT_NUM,CRT_TIME) VALUES (#mktId#,#teamId#,#teamName#,#status#,#endTime#,#ctNum#,#crtTime#)
+	</select>
+</mapper>
+

@@ -2,6 +2,8 @@
 
 import java.util.Date;
 
+import org.apache.ibatis.type.JdbcType;
+
 /**
  * 集货团基本信息表
  * @author 194129
@@ -33,7 +35,7 @@ public class TtTeam implements BaseModel<String>{
 	/**
 	 *参团截止时间
 	 */
-	private Date endTime;
+	private Long endTime;
 	/**
 	 * 已参团人数
 	 */
@@ -68,10 +70,10 @@ public class TtTeam implements BaseModel<String>{
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public Date getEndTime() {
+	public Long getEndTime() {
 		return endTime;
 	}
-	public void setEndTime(Date endTime) {
+	public void setEndTime(Long endTime) {
 		this.endTime = endTime;
 	}
 	public Integer getCtNum() {
