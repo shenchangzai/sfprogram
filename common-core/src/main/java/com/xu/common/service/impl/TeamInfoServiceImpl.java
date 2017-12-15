@@ -2,6 +2,7 @@ package com.xu.common.service.impl;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,7 +48,8 @@ public class TeamInfoServiceImpl extends AbstractCRUDBaseService<String, TtTeam,
 		if(null==proMarketBase){
 			throw new MlsException("根据专业市场ID查找不到对应的市场信息,请查证后再试!");
 		} 
-		Map<String, Object> map=BeanMapUtil.beanToMap(ttTeam, null);
+		Map<String, Object> map=new HashMap<>();
+		BeanMapUtil.beanToMap(ttTeam, map);
 		BeanMapUtil.beanToMap(proMarketBase, map);
 		if(null!=map &&  null!=map.get(endTimeKey)){
 			map.put(endTimeKey, DateUtil.getTimeStringByLong(Long.parseLong(map.get(endTimeKey).toString()))); 
