@@ -45,7 +45,7 @@ public class DemoController extends BaseCRUDController<String, Demo, DemoService
 	public Result createFolder(@ApiParam(value = "当前目录", required = true) @PathVariable("currentFolder") String currentFolder, 
 			@ApiParam(value = "文件夹名", required = false) @RequestParam(value = "newFolderName", required = false) String newFolderName) {
 		logger.info(service.getProperty("scss.nas.path.static"));
-		return Result.succeed(anybusService.getUserAge("123"));
+		return Result.succeed(anybusService.getMkt());
 	}
 	
 	@RequestMapping(value = "/list/{key}", method = RequestMethod.GET)

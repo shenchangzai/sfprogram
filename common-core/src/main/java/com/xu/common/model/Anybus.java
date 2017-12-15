@@ -17,6 +17,7 @@ public class Anybus implements BaseModel<String>{
 	private int groupLimit;
 	private int groupDuration;
 	private String useRequire;
+	private long lastTime;
 	public String getMktId() {
 		return mktId;
 	}
@@ -77,15 +78,20 @@ public class Anybus implements BaseModel<String>{
 	public void setUseRequire(String useRequire) {
 		this.useRequire = useRequire;
 	}
+	
+	public long getLastTime() {
+		return lastTime;
+	}
+	public void setLastTime(long lastTime) {
+		this.lastTime = lastTime;
+	}
 	@Override
 	public String getId() {
-		// TODO Auto-generated method stub
-		return null;
+		return mktId;
 	}
 	@Override
 	public void setId(String id) {
-		// TODO Auto-generated method stub
-		
+		this.mktId = id;
 	}
 
 }

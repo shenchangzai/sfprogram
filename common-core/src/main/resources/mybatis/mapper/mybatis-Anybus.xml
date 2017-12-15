@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xu.common.dao.AnybusDao">
+	<resultMap id="bean" type="com.xu.common.model.Anybus">
+		<id column="MKT_ID" property="mktId" jdbcType="VARCHAR" />
+		<result column="MKT_NAME_SHOW" property="mktNameShow" jdbcType="VARCHAR" />
+		<result column="DAILY_MIN_PACKAGES" property="dailyMinPackages" jdbcType="INTEGER" />
+		<result column="WEIGHT_MIN" property="weightMin" jdbcType="DOUBLE" />
+		<result column="WEIGHT_MAX" property="weightMax" jdbcType="DOUBLE" />
+		<result column="BASE_PRICE" property="basePrice" jdbcType="DOUBLE" />
+		<result column="BASE_WEIGHT" property="baseWeight" jdbcType="DOUBLE" />
+		<result column="GROUP_LIMIT" property="groupLimit" jdbcType="INTEGER" />
+		<result column="GROUP_DURATION" property="groupDuration" jdbcType="INTEGER" />
+		<result column="USE_REQUIRE" property="useRequire" jdbcType="CLOB" />
+		<result column="LAST_TIME" property="lastTime" jdbcType="BIGINT" />
+	</resultMap>
+	<select id="getMkt" resultMap="bean" >
+		SELECT A.MKT_ID            
+				,MKT_NAME_SHOW     
+				,DAILY_MIN_PACKAGES
+				,WEIGHT_MIN        
+				,WEIGHT_MAX        
+				,BASE_PRICE        
+				,BASE_WEIGHT       
+				,GROUP_LIMIT       
+				,GROUP_DURATION    
+				,USE_REQUIRE,
+				B.LAST_TIME 
+		FROM PRO_MARKET_BASE A LEFT JOIN PRO_MARKET_BASE_LOG B
+				ON A.MKT_ID = B.MKT_ID
+	</select>
+	
+	<update id="updateBaseLog">
+		UPDATE PRO_MARKET_BASE_LOG SET LAST_TIME = #{lastTime}
+		WHERE MKT_ID = #{mktId}
+	
+	</update>
+	
+	
+</mapper>
+
