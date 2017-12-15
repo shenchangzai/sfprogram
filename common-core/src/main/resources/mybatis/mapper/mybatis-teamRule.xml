@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xu.common.dao.TeamRuleDao">
+	<resultMap id="bean" type="com.xu.common.model.TeamRule">
+		<result column="MAT_ID" property="mktId" jdbcType="VARCHAR" />
+		<result column="TEAM_ID" property="teamId" jdbcType="VARCHAR" />
+		<result column="RULE" property="rule" jdbcType="VARCHAR" />
+		<result column="INCR" property="incr" jdbcType="INTEGER" />
+	</resultMap>
+	<select id="getTeamRule" resultMap="bean" >
+		SELECT RULE,INCR FROM TT_TEAM_RULE 
+		WHERE MAT_ID = #{mktId}
+		 AND TEAM_ID = #{teamId}
+		 AND RULE = #{rule}
+	</select>
+	
+	<insert id="insert" parameterType="com.xu.common.model.TeamRule" >
+		INSERT INTO TT_TEAM_RULE(MKT_ID,TEAM_ID,RULE,INCR)
+		VALUES(#{mktId},#{teamId},#{rule},#{incr})
+	</insert>
+	
+	<update id="update" parameterType="com.xu.common.model.TeamRule" >
+		UPDATE
+		TT_TEAM_RULE
+		SET
+		incr=#{incr}
+		WHERE MKT_ID = #{mktId}
+		AND TEAM_ID =  #{teamId}
+		AND RULE = #{rule}
+	</update>
+	
+</mapper>
+
