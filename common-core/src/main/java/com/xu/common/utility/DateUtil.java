@@ -13,6 +13,7 @@ public class DateUtil {
 	public final static String YYYYMMDDHHMMSSSSS = "yyyy-MM-dd HH:mm:ss.SSS";
 	public final static String YYYYMMDDHHMMSS = "yyyy-MM-dd HH:mm:ss";
 	public final static String YYYYMMDDHHMMSS_SHORT = "yyyyMMddHHmmss";
+	public final static String YYYYMMDDHHMMSS_LONG = "yyyy年MM月dd日HH时mm分";
 	public final static String HHMMSS = "HH:mm:ss";
 	public final static String HH = "HH";
 	public final static String HHMM = "HH:mm";
@@ -464,7 +465,6 @@ public class DateUtil {
 			return false;
 			
 		}catch (Exception e){
-			e.printStackTrace();
 		}
 		return false;
 	}
@@ -518,6 +518,19 @@ public class DateUtil {
 	}
 
 	/**
+	 *返回时间 yyyy年MM月dd日HH时mm分
+	 * @param time
+	 * @return
+	 */
+	public static String getTimeStringByLong(long time) {
+
+		Date date = new Date(time);
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+				YYYYMMDDHHMMSS_LONG);
+		return simpleDateFormat.format(date);
+	}
+	
+	/**
 	 * yyyy-MM-dd HH:mm:ss 返回时间的 HH:mm:ss
 	 *
 	 * @param startDate
@@ -531,7 +544,6 @@ public class DateUtil {
 			dateStr = dateStr.substring(11, 19);
 			return dateStr;
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return null;
 	}
@@ -547,7 +559,6 @@ public class DateUtil {
 			String dateStr = formatter(date, YYYYMMDDHHMMSS);
 			return dateStr;
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return null;
 	}
